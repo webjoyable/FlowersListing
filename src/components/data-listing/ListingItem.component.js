@@ -58,10 +58,13 @@ const LatinName = styled.div`
   margin-top: 1rem;
 `;
 
-const ListingItem = ({ data: { name, latin_name, profile_picture, id } }) => {
+const ListingItem = ({
+  data: { name, latin_name, profile_picture },
+  removeItem,
+}) => {
   return (
     <ItemWrapper>
-      <Remove>Remove</Remove>
+      <Remove onClick={removeItem}>Remove</Remove>
       <Image>
         <img alt={name} src={profile_picture} />
       </Image>

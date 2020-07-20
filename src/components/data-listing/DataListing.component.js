@@ -70,6 +70,11 @@ const loadMoreReducer = (state, action) => {
         loading: false,
         noMore: action.payload.length < 1 ? true : false,
       };
+    case "REMOVE_ITEM":
+      return {
+        ...state,
+        data: state.data.filter((item) => item.id !== action.payload),
+      };
     default:
       return state;
   }
@@ -116,7 +121,11 @@ const DataListing = ({ theme }) => {
   return fetchedData.data ? (
     <DataListingWrapper>
       {fetchedData.data.map((item) => (
-        <ListingItem key={item.id} data={item} />
+        <ListingItem
+          key={item.id}
+          data={item}
+          removeItem={() => dispatch({ type: "REMOVE_ITEM", payload: item.id })}
+        />
       ))}
       <LoadMore
         onClick={handleLoadMore}
